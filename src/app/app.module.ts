@@ -4,6 +4,7 @@ import { RouterModule } from "@angular/router";
 
 import { AppComponent } from './app.component';
 import { BibliothequeComponent } from './components/bibliotheque/bibliotheque.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { BibliothequeComponent } from './components/bibliotheque/bibliotheque.co
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     RouterModule.forRoot([
       {path: 'bibliotheque', component: BibliothequeComponent}
     ])

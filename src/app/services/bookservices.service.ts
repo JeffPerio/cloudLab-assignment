@@ -9,18 +9,18 @@ export class BookService {
   constructor() { }
 
   books:InterfaceBook[] = [{
-    "bookTitle":"Livre1",
-    "bookAuthor":"Auteur1",
+    "bookTitle":"L'épée de vérité",
+    "bookAuthor":"Terry Goodkind",
     "bookImage":"assets/images/livre1.jpg"
   },
   {
-    "bookTitle":"Livre2",
-    "bookAuthor":"Auteur2",
+    "bookTitle":"L'assassin Royal",
+    "bookAuthor":"Robin Hobb",
     "bookImage":"assets/images/livre2.jpg"
   },
   {
-    "bookTitle":"Livre3",
-    "bookAuthor":"Auteur3",
+    "bookTitle":"Eragon",
+    "bookAuthor":"Christopher Paolini",
     "bookImage":"assets/images/livre3.jpg"
   }]
 
