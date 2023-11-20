@@ -10,13 +10,15 @@ import { AddbookComponent } from './components/addbook/addbook.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
+import { AproposComponent } from './components/apropos/apropos.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BibliothequeComponent,
     WelcomeComponent,
-    AddbookComponent
+    AddbookComponent,
+    AproposComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +30,7 @@ import { CommonModule } from '@angular/common';
       { path: 'bibliotheque', component: BibliothequeComponent},
       { path: 'welcome', component: WelcomeComponent },
       { path: 'addbook', component: AddbookComponent },
+      { path: 'apropos', component: AproposComponent},
       { path: '', redirectTo: 'welcome', pathMatch:'full' },
       { path: '**', redirectTo: 'welcome', pathMatch: 'full'}
     ])

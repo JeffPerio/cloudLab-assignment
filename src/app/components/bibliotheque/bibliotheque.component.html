@@ -1,6 +1,6 @@
 <div class='card'>
 
-    <div class='card-header'>
+    <div class='card-header bg-primary text-white'>
         {{pageTitle}}
     </div>
 
@@ -8,9 +8,8 @@
         <div class='row'>
             <div class='col-md-2'> Filtrer par : </div>
             <div class='col-md-4'>
-                <input type='text' 
-                    [(ngModel)]='filtreListe'/>
-            </div>    
+                <input type='text' [(ngModel)]='filtreListe' />
+            </div>
         </div>
 
         <div class='row'>
@@ -34,11 +33,8 @@
                     <tr *ngFor='let livre of listeLivresFiltres'>
                         <td>{{livre.bookTitle}}</td>
                         <td>{{livre.bookAuthor}}</td>
-                        <td><img *ngIf="livre.bookImage" 
-                            [src]='livre.bookImage'
-                            [title]='livre.bookTitle'
-                            [style.width.px]='imageLargeur'
-                            [style.margin.px]='imageMarge'>
+                        <td><img *ngIf="livre.bookImage" [src]='livre.bookImage' [title]='livre.bookTitle'
+                                [style.width.px]='imageLargeur' [style.margin.px]='imageMarge'>
                         </td>
                         <td>{{livre.bookPrice | currency:'EUR':'symbol':'1.2-2' }}</td>
                     </tr>
