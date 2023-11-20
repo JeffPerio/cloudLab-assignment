@@ -31,9 +31,9 @@
 
                 <tbody>
                     <tr *ngFor='let livre of listeLivresFiltres'>
-                        <td>{{livre.bookTitle}}</td>
+                        <td>{{livre.bookTitle}} <a [routerLink]="['/bibliotheque', livre.bookId]"> route ?</a> </td>
                         <td>{{livre.bookAuthor}}</td>
-                        <td><img *ngIf="livre.bookImage" [src]='livre.bookImage' [title]='livre.bookTitle'
+                        <td><img *ngIf="livre.bookImage" [src]='livre.bookImage' [alt]='livre.bookTitle'
                                 [style.width.px]='imageLargeur' [style.margin.px]='imageMarge'>
                         </td>
                         <td>{{livre.bookPrice | currency:'EUR':'symbol':'1.2-2' }}</td>

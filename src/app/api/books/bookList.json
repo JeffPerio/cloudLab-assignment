@@ -1,0 +1,22 @@
+[
+    {
+        "bookId": 1,
+        "bookTitle": "L'épée de vérité",
+        "bookAuthor": "Terry Goodkind",
+        "bookImage": "assets/images/livre1.jpg",
+        "bookPrice": 10
+    },
+    {
+        "bookId": 2,
+        "bookTitle": "L'assassin Royal",
+        "bookAuthor": "Robin Hobb",
+        "bookImage": "assets/images/livre2.jpg",
+        "bookPrice": 15
+    },
+    {
+        "bookId": 3,
+        "bookTitle": "Eragon",
+        "bookAuthor": "Christopher Paolini",
+        "bookImage": "assets/images/livre3.jpg"
+    }
+]

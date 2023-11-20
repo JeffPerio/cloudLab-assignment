@@ -1,13 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { InterfaceBook } from 'src/app/models/book/interfaceBook';
 import { BookService } from 'src/app/services/bookservices.service';
+import { Subscription } from 'rxjs'
 
 @Component({
   selector: 'app-bibliotheque',
   templateUrl: './bibliotheque.component.html',
   styleUrls: ['./bibliotheque.component.css']
 })
-export class BibliothequeComponent implements OnInit {
+export class BibliothequeComponent implements OnInit, OnDestroy {
+
+  //Stockage de l'abonnement aux data
+  sub!: Subscription;
+  //Message d'erreur
+  errorMessage: string = '';
 
   pageTitle: string = "Bibliothèque"
   imageLargeur: number = 50;
@@ -20,8 +26,18 @@ export class BibliothequeComponent implements OnInit {
   constructor(private bookService: BookService){}
 
   ngOnInit(): void {
-    this.listeLivres = this.bookService.getBooks();
-    this.listeLivresFiltres = this.listeLivres;
+    //Appel au service pour récupérer la data
+    this.sub = this.bookService.getBooks().subscribe({
+      next: data => {
+        this.listeLivres = data;
+        this.listeLivresFiltres = this.listeLivres;
+      },
+      error: err => this.errorMessage = err
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
   /**

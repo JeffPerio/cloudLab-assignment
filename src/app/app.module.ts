@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { AproposComponent } from './components/apropos/apropos.component';
+import { BookdetailsComponent } from './components/bookdetails/bookdetails.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AproposComponent } from './components/apropos/apropos.component';
     BibliothequeComponent,
     WelcomeComponent,
     AddbookComponent,
-    AproposComponent
+    AproposComponent,
+    BookdetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +30,7 @@ import { AproposComponent } from './components/apropos/apropos.component';
     ToastrModule.forRoot(),
     RouterModule.forRoot([
       { path: 'bibliotheque', component: BibliothequeComponent},
+      { path: 'bibliotheque/:id', component: BookdetailsComponent},
       { path: 'welcome', component: WelcomeComponent },
       { path: 'addbook', component: AddbookComponent },
       { path: 'apropos', component: AproposComponent},
