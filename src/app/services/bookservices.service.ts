@@ -1,33 +1,54 @@
 import { Injectable } from '@angular/core';
 import { InterfaceBook } from '../models/book/interfaceBook';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
-import { Observable, catchError, map, tap, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
 
-  //Url du webserveur, ici est le fichier JSON portant les data pour ne pas avoir besoin de setup le serveur dans le tuto
-  private bookUrl = 'api/memos/memos.json';
+  //Url du webserveur, ici est le fichier JSON portant les data pour ne pas avoir besoin de setup le serveur
+  private bookUrl = 'api/books/bookList.json';
 
-  constructor(private http: HttpClient){}
+  private booksSubject = new BehaviorSubject<InterfaceBook[]>([]);
+  books$ = this.booksSubject.asObservable();
+
+  constructor(private http: HttpClient){
+    this.loadBooks();
+  }
+
+  loadBooks(): void {
+    this.http.get<InterfaceBook[]>(this.bookUrl).pipe(
+      catchError(this.handleError)
+    ).subscribe(books => {
+      this.booksSubject.next(books);
+    });
+  }
 
   getBooks(): Observable<InterfaceBook[]>{
-    return this.http.get<InterfaceBook[]>(this.bookUrl).pipe(catchError(this.handleError));
+    return this.books$;
   }
 
   getBook(idBook: number):Observable<InterfaceBook | undefined>{
-    return this.getBooks().pipe(map((books: InterfaceBook[]) => books.find(b => b.bookId === idBook)));
+    return this.getBooks().pipe(
+      map((books: InterfaceBook[]) => books.find(b => b.bookId === idBook))
+    );
   }
 
-  addBook(livre : InterfaceBook):boolean{
-    let tailleInitiale = this.books.length;
-    livre.bookId = tailleInitiale+1;
-    this.books.push(livre);
-    if(tailleInitiale + 1 === this.books.length)
-      return true;
-    return false;
+  addBook(livre : InterfaceBook):Promise<boolean>{
+    return new Promise<boolean>((resolve, reject) => {
+      const currentBooks = this.booksSubject.value;
+      livre.bookId = currentBooks.length + 1;
+      const newBooks = [...currentBooks, livre];
+      this.booksSubject.next(newBooks);
+
+      // Assumez que l'ajout du livre a réussi
+      resolve(true);
+
+      // En cas d'erreur, rejetez la Promise
+      // reject("Erreur lors de l'ajout du livre");
+    });
   }
 
   private handleError(err: HttpErrorResponse) {

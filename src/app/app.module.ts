@@ -12,6 +12,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { AproposComponent } from './components/apropos/apropos.component';
 import { BookdetailsComponent } from './components/bookdetails/bookdetails.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { BookdetailsComponent } from './components/bookdetails/bookdetails.compo
     FormsModule,
     BrowserAnimationsModule,
     CommonModule,
+    HttpClientModule,
     ToastrModule.forRoot(),
     RouterModule.forRoot([
       { path: 'bibliotheque', component: BibliothequeComponent},

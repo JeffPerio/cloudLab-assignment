@@ -23,18 +23,25 @@ export class AddbookComponent {
   gererAjoutLivre(formValues : any):void {
 
     const tmpBook : InterfaceBook = {
+      bookId : 0,
       bookTitle: formValues.bookTitle,
       bookAuthor: formValues.bookAuthor,
       bookImage: this.fileService.getStoredFile(this.bookImageKey),
       bookPrice: formValues.bookPrice
     };
-    let result = this.bookService.addBook(tmpBook);
-    if(result) {
-      this.toastr.success("Ajout du livre " + formValues.bookTitle);
-      this.router.navigate(['/bibliotheque']);
-    }
-    else
-      this.toastr.error("Erreur lors de l'ajout d'un livre ");
+
+    this.bookService.addBook(tmpBook)
+    .then(success => {
+      if (success) {
+        this.toastr.success("Ajout du livre " + formValues.bookTitle);
+        this.router.navigate(['/bibliotheque']);
+      } else {
+        this.toastr.error("Erreur lors de l\'ajout d'un livre ");
+      }
+    })
+    .catch(error => {
+      console.error('Erreur inattendue :', error);
+    });      
   }
 
   onFileSelected(event: any): void {
