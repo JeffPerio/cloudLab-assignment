@@ -1,5 +1,6 @@
 export interface InterfaceBook{
     bookTitle: string;
     bookAuthor: string;
-    bookImage: string;
+    bookImage?: string;
+    bookPrice?: number;
 }

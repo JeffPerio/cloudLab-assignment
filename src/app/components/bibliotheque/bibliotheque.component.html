@@ -13,34 +13,37 @@
             </div>    
         </div>
 
-    <div class='row'>
-        <div class='col-md-6'>
-            <h4> Filtré par : {{filtreListe}}</h4>
+        <div class='row'>
+            <div class='col-md-6'>
+                <h4> Filtré par : {{filtreListe}}</h4>
+            </div>
         </div>
-    </div>
 
-    <div class='table-responsibe'>
-        <table class='table' *ngIf="listeLivres.length">
-            <thead>
-                <tr>
-                    <th>Titre</th>
-                    <th>Auteur</th>
-                    <th>Couverture</th>
-                </tr>
-            </thead>
+        <div class='table-responsibe'>
+            <table class='table' *ngIf="listeLivres.length">
+                <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Auteur</th>
+                        <th>Couverture</th>
+                        <th>Prix</th>
+                    </tr>
+                </thead>
 
-            <tbody>
-                <tr *ngFor='let livre of listeLivresFiltres'>
-                    <td>{{livre.bookTitle}}</td>
-                    <td>{{livre.bookAuthor}}</td>
-                    <td><img
-                        [src]='livre.bookImage'
-                        [title]='livre.bookTitle'
-                        [style.width.px]='imageLargeur'
-                        [style.margin.px]='imageMarge'>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                <tbody>
+                    <tr *ngFor='let livre of listeLivresFiltres'>
+                        <td>{{livre.bookTitle}}</td>
+                        <td>{{livre.bookAuthor}}</td>
+                        <td><img *ngIf="livre.bookImage" 
+                            [src]='livre.bookImage'
+                            [title]='livre.bookTitle'
+                            [style.width.px]='imageLargeur'
+                            [style.margin.px]='imageMarge'>
+                        </td>
+                        <td>{{livre.bookPrice | currency:'EUR':'symbol':'1.2-2' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

@@ -1,7 +1,9 @@
 <nav class='navbar navbar-expand navbar-light bg-light' style='padding-left: 20px'>
-  <a class='navbar-brand'>{{pageTitle}}</a>
+  <h1 class='navbar-brand'>{{pageTitle}}</h1>
   <ul class='nav nav-pills'>
+      <li><a class='nav-link' [routerLink]="['/home']">Home</a></li>
       <li><a class='nav-link' [routerLink]="['/bibliotheque']">Bibliothèque</a></li>
+      <li><a class='nav-link' [routerLink]="['/addbook']">Ajouter Livre</a></li>
   </ul>
 </nav>
 <div class='container'>

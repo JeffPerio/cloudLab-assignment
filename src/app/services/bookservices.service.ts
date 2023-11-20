@@ -11,12 +11,14 @@ export class BookService {
   books:InterfaceBook[] = [{
     "bookTitle":"L'épée de vérité",
     "bookAuthor":"Terry Goodkind",
-    "bookImage":"assets/images/livre1.jpg"
+    "bookImage":"assets/images/livre1.jpg",
+    "bookPrice" : 10
   },
   {
     "bookTitle":"L'assassin Royal",
     "bookAuthor":"Robin Hobb",
-    "bookImage":"assets/images/livre2.jpg"
+    "bookImage":"assets/images/livre2.jpg",
+    "bookPrice" : 15
   },
   {
     "bookTitle":"Eragon",
@@ -26,5 +28,13 @@ export class BookService {
 
   getBooks():InterfaceBook[]{
     return this.books;
+  }
+
+  addBook(livre : InterfaceBook):boolean{
+    var tailleInitiale = this.books.length;
+    this.books.push(livre);
+    if(tailleInitiale + 1 === this.books.length)
+      return true;
+    return false;
   }
 }
