@@ -55,7 +55,7 @@ export class BibliothequeComponent implements OnInit, OnDestroy {
      //Conversion du filtre en lowercase pour s'assurer que le filtre ne tient pas compte de la casse
      filtrePar = filtrePar.toLowerCase();
      //Filtre la liste originale des livres par le nom passé en paramètre, conversion du titre en lowercase pour filtrer sans tenir compte de la casse
-     return this.listeLivres.filter((livreTmp : InterfaceBook) => livreTmp.bookTitle.toLowerCase().includes(filtrePar));
+     return this.listeLivres.filter((livreTmp : InterfaceBook) => livreTmp.bookTitle.toLowerCase().includes(filtrePar) || livreTmp.bookAuthor.toLowerCase().includes(filtrePar));
   }
 
 }
