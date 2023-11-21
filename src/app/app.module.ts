@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { AproposComponent } from './components/apropos/apropos.component';
 import { BookdetailsComponent } from './components/bookdetails/bookdetails.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FiltreAuteurTitrePipe } from './shared/filtre-auteur-titre.pipe';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { HttpClientModule } from '@angular/common/http';
     WelcomeComponent,
     AddbookComponent,
     AproposComponent,
-    BookdetailsComponent
+    BookdetailsComponent,
+    FiltreAuteurTitrePipe
   ],
   imports: [
     BrowserModule,

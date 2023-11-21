@@ -52,5 +52,4 @@ export class AddbookComponent {
       this.fileService.storeFile(files[0],this.bookImageKey);
     }
   }
-
 }

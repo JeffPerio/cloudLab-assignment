@@ -21,6 +21,8 @@ export class BibliothequeComponent implements OnInit, OnDestroy {
   listeLivres!: InterfaceBook[];
   listeLivresFiltres: InterfaceBook[] = [];
 
+  filtrePipe: string = "";
+
   private _filtreListe: string = '';
 
   constructor(private bookService: BookService){}
