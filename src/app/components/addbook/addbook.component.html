@@ -6,11 +6,13 @@
         <form autocomplete="off" #ajoutForm="ngForm" (ngSubmit)="gererAjoutLivre(ajoutForm.value)">
             <div class="form-group">
                 <label for="bookTitle">Titre :</label>
+                <em *ngIf="ajoutForm.controls['bookTitle']?.invalid && (ajoutForm.controls['bookTitle'].touched || mouseoverLogin)">Required</em>
                 <input (ngModel)='bookTitle' name="bookTitle" required id="bookTitleInput" type="text"
                     class="form-control" placeholder="Titre..." />
             </div>
             <div class="form-group">
                 <label for="bookAuthor">Auteur:</label>
+                <em *ngIf="ajoutForm.controls['bookAuthor']?.invalid && (ajoutForm.controls['bookAuthor'].touched || mouseoverLogin)" >Required</em>
                 <input (ngModel)='bookAuthor' name="bookAuthor" required id="bookAuthorInput" type="text"
                     class="form-control" placeholder="Auteur..." />
             </div>
@@ -25,7 +27,9 @@
                     placeholder="Prix..." />
             </div>
             <div class="col-md-6" style="margin-top: 1ex;">
-                <button class="btn btn-primary" type="submit">Ajouter un Livre</button>
+                <span (mouseenter)="mouseoverLogin=true" (mouseleave)="mouseoverLogin=false">
+                    <button class="btn btn-primary" [disabled]="ajoutForm.invalid" type="submit">Ajouter un Livre</button>
+                </span>
                 <button class="btn btn-default" type="button" [routerLink]="['/bibliotheque']">Annuler</button>
             </div>
         </form>

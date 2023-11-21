@@ -43,24 +43,18 @@ export class BookService {
       const newBooks = [...currentBooks, livre];
       this.booksSubject.next(newBooks);
 
-      // Assumez que l'ajout du livre a réussi
+      //Dans le vrai monde ajouter une logique pour déterminer true ou false
       resolve(true);
-
-      // En cas d'erreur, rejetez la Promise
+      // ligne pour rejeter l'ajout
       // reject("Erreur lors de l'ajout du livre");
     });
   }
 
   private handleError(err: HttpErrorResponse) {
-    // in a real world app, we may send the server to some remote logging infrastructure
-    // instead of just logging it to the console
     let errorMessage = '';
     if (err.error instanceof ErrorEvent) {
-      // A client-side or network error occurred. Handle it accordingly.
       errorMessage = `An error occurred: ${err.error.message}`;
     } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong,
       errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
     }
     console.error(errorMessage);

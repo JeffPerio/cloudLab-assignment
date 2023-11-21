@@ -19,9 +19,9 @@ export class AddbookComponent {
   bookAuthor: string = "";
   bookPrice : number = 0;
   bookImageKey: string = "";
+  mouseoverLogin: boolean = false;
 
   gererAjoutLivre(formValues : any):void {
-
     const tmpBook : InterfaceBook = {
       bookId : 0,
       bookTitle: formValues.bookTitle,
