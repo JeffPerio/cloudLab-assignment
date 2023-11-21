@@ -4,7 +4,7 @@ import { RouterModule } from "@angular/router";
 
 import { AppComponent } from './app.component';
 import { BibliothequeComponent } from './components/bibliotheque/bibliotheque.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { AddbookComponent } from './components/addbook/addbook.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -28,6 +28,7 @@ import { FiltreAuteurTitrePipe } from './shared/filtre-auteur-titre.pipe';
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     CommonModule,
     HttpClientModule,

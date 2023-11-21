@@ -50,6 +50,29 @@ export class BookService {
     });
   }
 
+
+  alterBook(livre : InterfaceBook):Promise<boolean>{
+    return new Promise<boolean>((resolve, reject) => {
+      const currentBooks = this.booksSubject.value;
+      // Trouver l'index du livre existant avec le même bookId
+      const index = currentBooks.findIndex(book => book.bookId === livre.bookId);
+
+      if (index !== -1) {
+        // Remplacer le livre existant par le nouveau livre
+        currentBooks[index] = livre;
+
+        // Notifier les abonnés du changement dans la liste de livres
+        this.booksSubject.next([...currentBooks]);
+
+        // Dans le vrai monde, ajouter une logique pour déterminer true ou false
+        resolve(true);
+      } else {
+        // Si aucun livre avec le même bookId n'est trouvé, rejeter la promesse
+        reject("Livre non trouvé pour modification");
+      }
+    });
+  }
+
   private handleError(err: HttpErrorResponse) {
     let errorMessage = '';
     if (err.error instanceof ErrorEvent) {

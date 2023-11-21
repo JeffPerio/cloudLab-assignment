@@ -8,12 +8,12 @@
         <div class='row'>
             <div class='col-md-6'>
                 <div class="form-group">
-                    <h3 for="filtreListe">Filtre par liste interposé</h3>
-                    <input type='text' [disabled]="filtrePipe.length > 0" [(ngModel)]='filtreListe' placeholder="Recherche" class="form-control"/>
+                    <h3 for="bookTitleInputInput">Filtre par liste interposé</h3>
+                    <input id="bookTitleInputInput" type='text' [disabled]="filtrePipe.length > 0" [(ngModel)]='filtreListe' placeholder="Recherche" class="form-control"/>
                 </div>
                 <div class="form-group">
-                    <h3 for="filtrePipe">Filtre par Pipe</h3>
-                    <input type='text' [disabled]="filtreListe.length > 0" [(ngModel)]='filtrePipe' placeholder="Recherche" class="form-control"/>
+                    <h3 for="filtrePipeInput">Filtre par Pipe</h3>
+                    <input id="filtrePipeInput" type='text' [disabled]="filtreListe.length > 0" [(ngModel)]='filtrePipe' placeholder="Recherche" class="form-control"/>
                 </div>
             </div>
         </div>
