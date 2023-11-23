@@ -39,10 +39,14 @@
 
     <div class='card-body' *ngIf='book && modification'>
         <form [formGroup]="bookForm" (ngSubmit)="saveBook(bookForm.value)"
-        autocomplete="off" novalidate>
+        autocomplete="off">
             <div class="form-group" [ngClass]="{'error': nonvalidateFormControl(bookForm.controls['bookTitle'])}">
                 <label for="bookTitleInput">Titre :</label>
-                <em *ngIf="nonvalidateFormControl(bookForm.controls['bookTitle'])">Required</em>
+                <em *ngIf="nonvalidateFormControl(bookForm.controls['bookTitle']) && bookTitle.hasError('required')">Required</em>
+                <!-- Possibilité de binder directement le formControl en utilisant son nom qui vient du ts -->
+                <!-- Attention la clé motInterditValidator de has error est celle qu'il faut donner dans le ts comme clé de l'objet retourné dans le custom validator -->
+                <!-- Attention la valeur getError est celle qui est celle qui sera donnée dans le ts comme valeur de l'objet retourné dans le custom validator -->
+                <em *ngIf="nonvalidateFormControl(bookTitle) && bookTitle.hasError('motInterditValidator')">Mot interdit détecté : {{bookTitle.getError('motInterditValidator')}}</em>            
                 <input formControlName="bookTitle" id="bookTitleInput" type="text" class="form-control" placeholder="{{book.bookTitle}}"/>
             </div>
             
@@ -50,6 +54,10 @@
                 <label for="bookAuthorInput">Auteur:</label>
                 <em *ngIf="nonvalidateFormControl(bookForm.controls['bookAuthor']) && bookForm.controls['bookAuthor'].hasError('required')">Required</em>
                 <em *ngIf="nonvalidateFormControl(bookForm.controls['bookAuthor']) && bookForm.controls['bookAuthor'].hasError('pattern')">Doit débuter par une lettre</em>
+                <!-- Possibilité de binder directement le formControl en utilisant son nom qui vient du ts -->
+                <!-- Attention la clé listeMotsInterditsValidator de has error est celle qu'il faut donner dans le ts comme clé de l'objet retourné dans le custom validator -->
+                <!-- Attention la valeur getError est celle qui est celle qui sera donnée dans le ts comme valeur de l'objet retourné dans le custom validator -->
+                <em *ngIf="nonvalidateFormControl(bookAuthor) && bookAuthor.hasError('listeMotsInterditsValidator')">Mot(s) interdit(s) détecté(s) : {{bookAuthor.getError('listeMotsInterditsValidator')}}</em>
                 <input formControlName="bookAuthor" id="bookAuthorInput" type="text" class="form-control" placeholder="{{book.bookAuthor}}"/>
             </div>
             <div class="form-group" [ngClass]="{'error': nonvalidateFormControl(bookForm.controls['bookPrice'])}">
