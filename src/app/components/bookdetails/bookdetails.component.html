@@ -37,7 +37,8 @@
             </div>
             <div class="form-group" [ngClass]="{'error': nonvalidateFormControl(bookForm.controls['bookAuthor'])}">
                 <label for="bookAuthorInput">Auteur:</label>
-                <em *ngIf="nonvalidateFormControl(bookForm.controls['bookAuthor'])">Required</em>
+                <em *ngIf="nonvalidateFormControl(bookForm.controls['bookAuthor']) && bookForm.controls['bookAuthor'].hasError('required')">Required</em>
+                <em *ngIf="nonvalidateFormControl(bookForm.controls['bookAuthor']) && bookForm.controls['bookAuthor'].hasError('pattern')">Doit débuter par une lettre</em>
                 <input formControlName="bookAuthor" id="bookAuthorInput" type="text" class="form-control" placeholder="{{book.bookAuthor}}"/>
             </div>
             <div class="form-group" [ngClass]="{'error': nonvalidateFormControl(bookForm.controls['bookPrice'])}">
