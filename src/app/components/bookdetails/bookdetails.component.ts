@@ -23,9 +23,9 @@ export class BookdetailsComponent implements OnInit, OnDestroy{
   //Attributs pour la modification
   modification:boolean = false;
 
-  private bookTitle!: FormControl;
-  private bookAuthor!: FormControl;
-  private bookPrice!: FormControl;
+  bookTitle!: FormControl;
+  bookAuthor!: FormControl;
+  bookPrice!: FormControl;
   bookForm!: FormGroup;
  
 
@@ -46,7 +46,7 @@ export class BookdetailsComponent implements OnInit, OnDestroy{
   }
 
   onBack():void{
-    this.router.navigate(['/bibliotheque'])
+    this.router.navigate(['/bibliotheque']);
   }
 
   //Méthode d'activation de la modiciation
@@ -58,8 +58,8 @@ export class BookdetailsComponent implements OnInit, OnDestroy{
 
   //Initialisation du formulaire lors de l'activation de la modification
   initialisationFormulaire():void {
-    this.bookTitle = new FormControl(Validators.required);
-    this.bookAuthor = new FormControl(this.book?.bookAuthor, [Validators.required, Validators.pattern('[a-zA-Z].*')]);
+    this.bookTitle = new FormControl(this.book?.bookTitle, [Validators.required, this.motInterditValidator]);
+    this.bookAuthor = new FormControl(this.book?.bookAuthor, [Validators.required, Validators.pattern('[a-zA-Z].*'), this.listeMotsInterditsValidator(['foo', 'bar'])]);
     this.bookPrice = new FormControl(this.book?.bookPrice, Validators.required);
 
     this.bookForm = new FormGroup({
@@ -74,7 +74,7 @@ export class BookdetailsComponent implements OnInit, OnDestroy{
   }
 
   saveBook(formValues : any):void {
-    if(formValues.bookForm?.valid){
+    if(this.bookForm.valid){
       // Affectation des data du formulaire et de celles déjà existantes
       // Affectation a l'attribut du composant
       this.book = {
@@ -82,7 +82,8 @@ export class BookdetailsComponent implements OnInit, OnDestroy{
         bookTitle: formValues.bookTitle,
         bookAuthor: formValues.bookAuthor,
         bookImage: this.book ? this.book.bookImage : '',
-        bookPrice: formValues.bookPrice
+        bookPrice: formValues.bookPrice,
+        bookReview: this.book?.bookReview
       };
       //Masque le formulaire de modification
       this.modification = false;
@@ -100,11 +101,31 @@ export class BookdetailsComponent implements OnInit, OnDestroy{
         console.error('Erreur inattendue :', error);
       }); 
     }
+    else
+      this.toastr.error("Erreur l'un des champs n'est pas valide.");
   }
 
   //Méthode de vérification si le formulaire a été modifié et est invalide pour styliser les input
   nonvalidateFormControl(formControl : AbstractControl):boolean{
-    return formControl.invalid && formControl.touched;
+    return formControl.invalid && formControl.dirty;
   }
 
+  // Custom validator
+  motInterditValidator(formControl : FormControl): {[key: string]:any} | null{
+    //Attention la clé motInterditValidator est celle qu'il faut chercher dans le HTML avec le .hasError
+    //Attention la valeur foo est celle qui sera accessible par interpolation depuis le nom du validator dans le template
+    return formControl.value.includes('foo') ? {'motInterditValidator' : 'foo'} : null;
+  }
+
+    //Custom validator liste
+    listeMotsInterditsValidator(mots :string[]) {
+      return (formControl : FormControl): {[key: string]:any} | null => {
+        if(!mots){
+          return null;
+        } else {
+          let invalidWords = mots.map(word => formControl.value.includes(word) ? word : null).filter(word => word != null);
+          return invalidWords && invalidWords.length > 0 ? {'listeMotsInterditsValidator' : invalidWords.join(', ')} : null;
+        }
+      }
+    }
 }
