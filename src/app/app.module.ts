@@ -14,6 +14,7 @@ import { AproposComponent } from './components/apropos/apropos.component';
 import { BookdetailsComponent } from './components/bookdetails/bookdetails.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FiltreAuteurTitrePipe } from './shared/filtre-auteur-titre.pipe';
+import { CommentaireComponent } from './components/commentaire/commentaire.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { FiltreAuteurTitrePipe } from './shared/filtre-auteur-titre.pipe';
     AddbookComponent,
     AproposComponent,
     BookdetailsComponent,
-    FiltreAuteurTitrePipe
+    FiltreAuteurTitrePipe,
+    CommentaireComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +41,7 @@ import { FiltreAuteurTitrePipe } from './shared/filtre-auteur-titre.pipe';
       { path: 'welcome', component: WelcomeComponent },
       { path: 'addbook', component: AddbookComponent },
       { path: 'apropos', component: AproposComponent},
+      { path: 'commentaires', component: CommentaireComponent},
       { path: '', redirectTo: 'welcome', pathMatch:'full' },
       { path: '**', redirectTo: 'welcome', pathMatch: 'full'}
     ])

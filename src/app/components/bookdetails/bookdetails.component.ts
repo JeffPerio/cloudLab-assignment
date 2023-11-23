@@ -59,7 +59,7 @@ export class BookdetailsComponent implements OnInit, OnDestroy{
   //Initialisation du formulaire lors de l'activation de la modification
   initialisationFormulaire():void {
     this.bookTitle = new FormControl(this.book?.bookTitle, Validators.required);
-    this.bookAuthor = new FormControl(this.book?.bookAuthor, Validators.required);
+    this.bookAuthor = new FormControl(this.book?.bookAuthor, [Validators.required, Validators.pattern('[a-zA-Z].*')]);
     this.bookPrice = new FormControl(this.book?.bookPrice, Validators.required);
 
     this.bookForm = new FormGroup({
@@ -74,7 +74,7 @@ export class BookdetailsComponent implements OnInit, OnDestroy{
   }
 
   saveBook(formValues : any):void {
-    if(formValues.bookForm.valid){
+    if(formValues.bookForm?.valid){
       // Affectation des data du formulaire et de celles déjà existantes
       // Affectation a l'attribut du composant
       this.book = {

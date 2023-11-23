@@ -1,23 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { BookService } from 'src/app/services/bookservices.service';
 import { InterfaceBook } from '../../models/book/interfaceBook';
 import { Router } from '@angular/router';
 import { FileService } from 'src/app/services/fileservice.service';
+import { AbstractControl, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-addbook',
   templateUrl: './addbook.component.html',
   styleUrls: ['./addbook.component.css']
 })
-export class AddbookComponent {
+export class AddbookComponent{
 
   pageTitle: string = "Ajout de Livre";
+
   constructor(private toastr: ToastrService, private bookService: BookService, private router: Router, private fileService : FileService) {}
 
-  bookTitle: string = "";
-  bookAuthor: string = "";
-  bookPrice : number = 0;
+  //Création d'un objet livre pour le mapping NgModel du template. Ne sera pas utilisé (possibilité de laisser l'objet undefined)
+  nouveauLivre: InterfaceBook = {
+    bookId : 0,
+    bookTitle : "",
+    bookAuthor : "",
+    bookPrice : 0
+  }
   bookImageKey: string = "";
   mouseoverLogin: boolean = false;
 
@@ -52,4 +58,9 @@ export class AddbookComponent {
       this.fileService.storeFile(files[0],this.bookImageKey);
     }
   }
+
+    //Méthode de vérification si le formulaire a été modifié et est invalide pour styliser les input
+    validateFormControl(formControl : AbstractControl):boolean{
+      return formControl?.invalid && formControl?.touched;
+    }
 }

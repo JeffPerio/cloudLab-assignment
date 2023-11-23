@@ -4,4 +4,8 @@ export interface InterfaceBook{
     bookAuthor: string;
     bookImage?: string;
     bookPrice?: number;
+    bookReview?: {
+        reviewComment: string,
+        reviewRate: number
+    }
 }

@@ -4,16 +4,17 @@
     </div>
     <div class='card-body'>
         <form autocomplete="off" #ajoutForm="ngForm" (ngSubmit)="gererAjoutLivre(ajoutForm.value)">
-            <div class="form-group">
+            <div class="form-group" [ngClass]="{'error': validateFormControl(ajoutForm.controls['bookTitle'])}">
                 <label for="bookTitle">Titre :</label>
                 <em *ngIf="ajoutForm.controls['bookTitle']?.invalid && (ajoutForm.controls['bookTitle'].touched || mouseoverLogin)">Required</em>
-                <input (ngModel)='bookTitle' name="bookTitle" required id="bookTitleInput" type="text"
+                <input (ngModel)='nouveauLivre.bookTitle' name="bookTitle" required id="bookTitleInput" type="text"
                     class="form-control" placeholder="Titre..." />
             </div>
-            <div class="form-group">
+            <div class="form-group" [ngClass]="{'error': validateFormControl(ajoutForm.controls['bookAuthor'])}" >
                 <label for="bookAuthor">Auteur:</label>
-                <em *ngIf="ajoutForm.controls['bookAuthor']?.invalid && (ajoutForm.controls['bookAuthor'].touched || mouseoverLogin)" >Required</em>
-                <input (ngModel)='bookAuthor' name="bookAuthor" required id="bookAuthorInput" type="text"
+                <em *ngIf="ajoutForm.controls['bookAuthor']?.invalid && (ajoutForm.controls['bookAuthor'].touched || mouseoverLogin) && !ajoutForm.controls['bookAuthor'].hasError('pattern')" >Required</em>
+                <em *ngIf="ajoutForm.controls['bookAuthor']?.invalid && ajoutForm.controls['bookAuthor'].hasError('pattern')" >Doit débuter par une lettre</em>
+                <input (ngModel)='nouveauLivre.bookAuthor' name="bookAuthor" required pattern="[a-zA-Z].*" id="bookAuthorInput" type="text"
                     class="form-control" placeholder="Auteur..." />
             </div>
             <div class="form-group">
@@ -23,7 +24,7 @@
             </div>
             <div class="form-group">
                 <label for="bookPrice">Prix:</label>
-                <input (ngModel)="bookPrice" name="bookPrice" id="bookPriceInput" type="number" class="form-control"
+                <input (ngModel)="nouveauLivre.bookPrice" name="bookPrice" id="bookPriceInput" type="number" class="form-control"
                     placeholder="Prix..." />
             </div>
             <div class="col-md-6" style="margin-top: 1ex;">
