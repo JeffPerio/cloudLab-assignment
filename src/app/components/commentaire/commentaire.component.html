@@ -3,24 +3,26 @@
         {{pageTitle}}
     </div>
     <div class='card-body'>
-        <form autocomplete="off" #ajoutForm="ngForm" (ngSubmit)="gererAjoutCommentaire(ajoutForm.value)">
-            <div class="form-group" [ngClass]="{'error': validateFormControl(ajoutForm.controls['bookTitle'])}">
-                <label for="bookTitle">Titre :</label>
-                <em *ngIf="ajoutForm.controls['bookTitle']?.invalid && (ajoutForm.controls['bookTitle'].touched || mouseoverLogin)">Required</em>
-                <input (ngModel)='nouveauLivre.bookTitle' name="bookTitle" required id="bookTitleInput" type="text"
-                    class="form-control" placeholder="Titre..." />
-            </div>
 
+        <div>
+            <label for="livreSelect">Sélectionner un livre </label>
+            <select id="livreSelect" [(ngModel)]="book" name="livreSelect">
+                <option *ngFor="let livre of listeLivres" [ngValue]="livre">{{ livre.bookTitle }}</option>
+            </select>
+        </div>
+
+        <form *ngIf="book" autocomplete="off" #ajoutForm="ngForm" (ngSubmit)="gererAjoutCommentaire(ajoutForm.value)">  
+            
             <div ngModelGroup="bookReview">
                 <div class="form-group">
-                    <label for="bookComment">Commentaire:</label>
-                    <input (ngModel)="nouveauLivre.bookReview?.reviewComment" name="bookComment" id="bookCommentInput" type="string" class="form-control"
+                    <label for="reviewComment">Commentaire:</label>
+                    <input (ngModel)="nouveauLivre.bookReview?.reviewComment" name="reviewComment" id="bookCommentInput" type="string" class="form-control"
                         placeholder="Commentaire ..." />
                 </div>
 
                 <div class="form-group">
-                    <label for="bookRate">Note:</label>
-                    <input (ngModel)="nouveauLivre.bookReview?.reviewRate" name="bookRate" id="bookRateInput" type="number" class="form-control"
+                    <label for="reviewRate">Note:</label>
+                    <input (ngModel)="nouveauLivre.bookReview?.reviewRate" name="reviewRate" id="bookRateInput" type="number" class="form-control"
                         placeholder="Note ..." />
                 </div>
             </div>
@@ -28,9 +30,9 @@
 
             <div class="col-md-6" style="margin-top: 1ex;">
                 <span (mouseenter)="mouseoverLogin=true" (mouseleave)="mouseoverLogin=false">
-                    <button class="btn btn-primary" [disabled]="ajoutForm.invalid" type="submit">Ajouter un Livre</button>
+                    <button class="btn btn-primary" [disabled]="ajoutForm.invalid" type="submit">Ajouter un commentaire</button>
                 </span>
-                <button class="btn btn-default" type="button" [routerLink]="['/bibliotheque']">Annuler</button>
+                <button class="btn btn-default" type="button">Annuler</button>
             </div>
         </form>
     </div>

@@ -49,22 +49,22 @@ export class CommentaireComponent implements OnInit, OnDestroy {
   }
 
   gererAjoutCommentaire(formValues : any):void {
-    if(formValues.bookForm?.valid){
       // Affectation des data du formulaire et de celles déjà existantes
       // Affectation a l'attribut du composant
       this.book = {
         bookId : this.book ? this.book.bookId : 0,
-        bookTitle: formValues.bookTitle,
-        bookAuthor: formValues.bookAuthor,
+        bookTitle: this.book ? this.book.bookTitle : '',
+        bookAuthor: this.book ? this.book.bookAuthor : '',
         bookImage: this.book ? this.book.bookImage : '',
-        bookPrice: formValues.bookPrice
+        bookPrice: this.book ? this.book.bookPrice : 0,
+        bookReview: formValues.bookReview
       };
 
       //Appel du service pour modifier le livre
       this.bookService.alterBook(this.book)
       .then(success => {
         if (success) {
-          this.toastr.success("Ajout d'un commentaire sur le livre " + formValues.bookTitle);
+          this.toastr.success("Ajout d'un commentaire sur le livre " + this.book?.bookTitle);
         } else {
           this.toastr.error("Erreur lors de l'ajout du commentaire");
         }
@@ -72,7 +72,6 @@ export class CommentaireComponent implements OnInit, OnDestroy {
       .catch(error => {
         console.error('Erreur inattendue :', error);
       }); 
-    }   
   }
 
   //Méthode de vérification si le formulaire a été modifié et est invalide pour styliser les input

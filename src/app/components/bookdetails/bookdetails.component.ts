@@ -58,7 +58,7 @@ export class BookdetailsComponent implements OnInit, OnDestroy{
 
   //Initialisation du formulaire lors de l'activation de la modification
   initialisationFormulaire():void {
-    this.bookTitle = new FormControl(this.book?.bookTitle, Validators.required);
+    this.bookTitle = new FormControl(Validators.required);
     this.bookAuthor = new FormControl(this.book?.bookAuthor, [Validators.required, Validators.pattern('[a-zA-Z].*')]);
     this.bookPrice = new FormControl(this.book?.bookPrice, Validators.required);
 
