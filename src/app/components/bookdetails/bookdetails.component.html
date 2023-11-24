@@ -25,7 +25,7 @@
                 <p *ngIf="!book.bookImage">Aucune image disponible</p>
             </div>
             <div class='col-sm-4'>
-                <liste-commentaire [bookComment]="book.bookReview" (addCommentEventEmitter)="addComment()"></liste-commentaire>
+                <liste-commentaire [booksReviewsList]="book.bookReviews" (addCommentEventEmitter)="addComment()"></liste-commentaire>
             </div>
         </div>
     </div>

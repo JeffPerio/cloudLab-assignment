@@ -4,19 +4,22 @@
         "bookTitle": "L'épée de vérité",
         "bookAuthor": "Terry Goodkind",
         "bookImage": "assets/images/livre1.jpg",
-        "bookPrice": 10
+        "bookPrice": 10,
+        "bookReviews": []
     },
     {
         "bookId": 2,
         "bookTitle": "L'assassin Royal",
         "bookAuthor": "Robin Hobb",
         "bookImage": "assets/images/livre2.jpg",
-        "bookPrice": 15
+        "bookPrice": 15,
+        "bookReviews": []
     },
     {
         "bookId": 3,
         "bookTitle": "Eragon",
         "bookAuthor": "Christopher Paolini",
-        "bookImage": "assets/images/livre3.jpg"
+        "bookImage": "assets/images/livre3.jpg",
+        "bookReviews": []
     }
 ]

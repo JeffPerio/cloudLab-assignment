@@ -9,7 +9,7 @@ import { InterfaceComment } from 'src/app/models/book/interfaceComment';
 export class ListeCommentaireComponent {
 
   @Input()
-  bookComment:any;
+  booksReviewsList:any;
   
   @Output()
   addCommentEventEmitter: EventEmitter<string> = new EventEmitter();

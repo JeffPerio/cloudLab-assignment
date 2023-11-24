@@ -83,7 +83,7 @@ export class BookdetailsComponent implements OnInit, OnDestroy{
         bookAuthor: formValues.bookAuthor,
         bookImage: this.book ? this.book.bookImage : '',
         bookPrice: formValues.bookPrice,
-        bookReview: this.book?.bookReview
+        bookReviews: this.book?.bookReviews
       };
       //Masque le formulaire de modification
       this.modification = false;

@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { InterfaceBook } from 'src/app/models/book/interfaceBook';
+import { InterfaceComment } from 'src/app/models/book/interfaceComment';
 import { BookService } from 'src/app/services/bookservices.service';
 
 @Component({
@@ -21,18 +23,12 @@ export class CommentaireComponent implements OnInit, OnDestroy {
   //Message d'erreur
   errorMessage: string = "";
   // Modèle pour le formulaire
-  nouveauLivre: InterfaceBook = {
-    bookId : 0,
-    bookTitle : "",
-    bookAuthor : "",
-    bookPrice : 0,
-    bookReview : {
-      reviewComment : "",
-      reviewRate : 0
-    }
-  }
+  nouveauCommentaire: InterfaceComment = {
+    reviewComment : "",
+    reviewRate : 0
+  };
 
-  constructor(private toastr: ToastrService,private bookService:BookService){}
+  constructor(private toastr: ToastrService, private bookService:BookService, private router: Router){}
 
   ngOnInit(): void {
     //Appel au service pour récupérer la data
@@ -51,20 +47,14 @@ export class CommentaireComponent implements OnInit, OnDestroy {
   gererAjoutCommentaire(formValues : any):void {
       // Affectation des data du formulaire et de celles déjà existantes
       // Affectation a l'attribut du composant
-      this.book = {
-        bookId : this.book ? this.book.bookId : 0,
-        bookTitle: this.book ? this.book.bookTitle : '',
-        bookAuthor: this.book ? this.book.bookAuthor : '',
-        bookImage: this.book ? this.book.bookImage : '',
-        bookPrice: this.book ? this.book.bookPrice : 0,
-        bookReview: formValues.bookReview
-      };
+      this.nouveauCommentaire = formValues.bookReview;
 
       //Appel du service pour modifier le livre
-      this.bookService.alterBook(this.book)
+      this.bookService.addReview(this.book?.bookId ?? 0, this.nouveauCommentaire)
       .then(success => {
         if (success) {
           this.toastr.success("Ajout d'un commentaire sur le livre " + this.book?.bookTitle);
+          this.router.navigate(['/bibliotheque/'+ this.book?.bookId]);
         } else {
           this.toastr.error("Erreur lors de l'ajout du commentaire");
         }
@@ -72,6 +62,10 @@ export class CommentaireComponent implements OnInit, OnDestroy {
       .catch(error => {
         console.error('Erreur inattendue :', error);
       }); 
+  }
+
+  navigateToBiblio(): void {
+    this.router.navigate(['/bibliotheque']);
   }
 
   //Méthode de vérification si le formulaire a été modifié et est invalide pour styliser les input

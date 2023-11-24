@@ -6,5 +6,5 @@ export interface InterfaceBook{
     bookAuthor: string;
     bookImage?: string;
     bookPrice?: number;
-    bookReview?: InterfaceComment
+    bookReviews?: InterfaceComment[]
 }

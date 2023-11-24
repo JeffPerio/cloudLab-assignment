@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { InterfaceBook } from '../models/book/interfaceBook';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { BehaviorSubject, Observable, catchError, map, tap, throwError } from 'rxjs';
+import { InterfaceComment } from '../models/book/interfaceComment';
 
 @Injectable({
   providedIn: 'root'
@@ -69,6 +70,27 @@ export class BookService {
       } else {
         // Si aucun livre avec le même bookId n'est trouvé, rejeter la promesse
         reject("Livre non trouvé pour modification");
+      }
+    });
+  }
+
+  addReview(bookId: number, review : InterfaceComment):Promise<boolean>{
+    return new Promise<boolean>((resolve, reject) => {
+      const currentBooks = this.booksSubject.value;
+      // Trouver l'index du livre existant avec le même bookId
+      const index = currentBooks.findIndex(book => book.bookId === bookId);
+
+      if (index !== -1) {
+        // Ajouter la revue a la liste des revues du livre
+        currentBooks[index].bookReviews?.push(review);
+
+        // Notifier les abonnés du changement dans la liste de livres
+        this.booksSubject.next([...currentBooks]);
+        // Dans le vrai monde, ajouter une logique pour déterminer true ou false
+        resolve(true);
+      } else {
+        // Si aucun livre avec le même bookId n'est trouvé, rejeter la promesse
+        reject("Livre non trouvé pour ajout du commentaire");
       }
     });
   }
