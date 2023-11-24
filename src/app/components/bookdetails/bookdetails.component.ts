@@ -27,6 +27,8 @@ export class BookdetailsComponent implements OnInit, OnDestroy{
   bookAuthor!: FormControl;
   bookPrice!: FormControl;
   bookForm!: FormGroup;
+
+  titreCommentaire:string = "Titre Commentaire"
  
 
   constructor(private toastr: ToastrService, private route: ActivatedRoute, private router: Router,

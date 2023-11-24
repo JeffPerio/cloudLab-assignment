@@ -7,15 +7,22 @@ import { InterfaceComment } from 'src/app/models/book/interfaceComment';
   styleUrls: ['./liste-commentaire.component.css']
 })
 export class ListeCommentaireComponent {
-
-  @Input()
-  booksReviewsList:any;
   
+  @Input()
+  titre:string ="";
+
   @Output()
   addCommentEventEmitter: EventEmitter<string> = new EventEmitter();
 
+
+  visible:boolean = true;
+
   gererAddComment():void {
     this.addCommentEventEmitter.emit("Ajout de Commentaire demandé");
+  }
+
+  toggleContent():void {
+    this.visible = !this.visible;
   }
 
 }

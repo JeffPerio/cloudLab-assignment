@@ -25,7 +25,18 @@
                 <p *ngIf="!book.bookImage">Aucune image disponible</p>
             </div>
             <div class='col-sm-4'>
-                <liste-commentaire [booksReviewsList]="book.bookReviews" (addCommentEventEmitter)="addComment()"></liste-commentaire>
+                <div class="row border" *ngFor="let review of book.bookReviews">                
+                    <liste-commentaire [titre]="this.titreCommentaire" (addCommentEventEmitter)="addComment()">
+                        <div class="row">
+                            <div class='col-md-6'>Commentaire</div>
+                            <div class='col-md-6'>{{review.reviewComment}}</div>
+                        </div>
+                        <div class="row">
+                            <div class='col-md-6'>Note</div>
+                            <div class='col-md-6'>{{review.reviewRate}}</div>
+                        </div>
+                    </liste-commentaire>
+                </div>
             </div>
         </div>
     </div>

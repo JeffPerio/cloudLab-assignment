@@ -1,12 +1,7 @@
-<div class="row" *ngFor="let review of booksReviewsList">
-    <div class="row">
-        <div class='col-md-4'>Commentaire</div>
-        <div class='col-md-8'>{{review.reviewComment}}</div>
-    </div>
-    <div class="row">
-        <div class='col-md-4'>Note</div>
-        <div class='col-md-8'>{{review.reviewRate}}</div>
-    </div>
+<div (click)="toggleContent()" class="pointable">
+    <h4>{{titre}} </h4>
+    <ng-content *ngIf="visible"></ng-content>
+
 </div>
 <div class="row">
     <button class="btn btn-primary" (click)="gererAddComment()">Ajouter un commentaire</button>
