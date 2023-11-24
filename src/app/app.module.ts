@@ -15,6 +15,7 @@ import { BookdetailsComponent } from './components/bookdetails/bookdetails.compo
 import { HttpClientModule } from '@angular/common/http';
 import { FiltreAuteurTitrePipe } from './shared/filtre-auteur-titre.pipe';
 import { CommentaireComponent } from './components/commentaire/commentaire.component';
+import { ListeCommentaireComponent } from './components/liste-commentaire/liste-commentaire.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { CommentaireComponent } from './components/commentaire/commentaire.compo
     AproposComponent,
     BookdetailsComponent,
     FiltreAuteurTitrePipe,
-    CommentaireComponent
+    CommentaireComponent,
+    ListeCommentaireComponent
   ],
   imports: [
     BrowserModule,

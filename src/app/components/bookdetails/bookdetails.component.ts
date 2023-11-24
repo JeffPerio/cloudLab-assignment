@@ -117,15 +117,20 @@ export class BookdetailsComponent implements OnInit, OnDestroy{
     return formControl.value.includes('foo') ? {'motInterditValidator' : 'foo'} : null;
   }
 
-    //Custom validator liste
-    listeMotsInterditsValidator(mots :string[]) {
-      return (formControl : FormControl): {[key: string]:any} | null => {
-        if(!mots){
-          return null;
-        } else {
-          let invalidWords = mots.map(word => formControl.value.includes(word) ? word : null).filter(word => word != null);
-          return invalidWords && invalidWords.length > 0 ? {'listeMotsInterditsValidator' : invalidWords.join(', ')} : null;
-        }
+  //Custom validator liste
+  listeMotsInterditsValidator(mots :string[]) {
+    return (formControl : FormControl): {[key: string]:any} | null => {
+      if(!mots){
+        return null;
+      } else {
+        let invalidWords = mots.map(word => formControl.value.includes(word) ? word : null).filter(word => word != null);
+        return invalidWords && invalidWords.length > 0 ? {'listeMotsInterditsValidator' : invalidWords.join(', ')} : null;
       }
     }
+  }
+
+  addComment():void {
+    this.router.navigate(['/commentaires']);
+  }
+
 }
