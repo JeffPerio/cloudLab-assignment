@@ -1,7 +1,10 @@
 <div (click)="toggleContent()" class="pointable">
-    <h4>{{titre}} </h4>
-    <ng-content *ngIf="visible"></ng-content>
-
+    <h4>
+        <ng-content select=".titleSection">
+        </ng-content>
+    </h4>
+    <ng-content  select="[comment-body]" *ngIf="visible">
+    </ng-content>
 </div>
 <div class="row">
     <button class="btn btn-primary" (click)="gererAddComment()">Ajouter un commentaire</button>
