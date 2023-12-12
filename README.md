@@ -1,8 +1,10 @@
 # CloudLabAssignment
+Projet créé pour répondre aux assignements Ci dessous (Step Final du parcours Angular sur Degreed - Formation Capgemini).
+Projet réutilisé après avoir terminé les assignements pour expérimenter les mécaniques Angular (Modules de formation Angular 11 sur PluralSight)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.1.
 
-Angular Assignments
+# Angular Assignments
 
 Assignment 01: Create a basic Angular application that displays a list of books using
 ngFor directive. Each book should be displayed with its title, author, and cover image. The
